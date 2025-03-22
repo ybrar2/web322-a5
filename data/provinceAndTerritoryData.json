@@ -1,0 +1,24 @@
+[
+    {
+      "code": "ON",
+      "name": "Ontario",
+      "type": "Province",
+      "region": "Central Canada",
+      "capital": "Toronto"
+    },
+    {
+      "code": "BC",
+      "name": "British Columbia",
+      "type": "Province",
+      "region": "West Coast",
+      "capital": "Victoria"
+    },
+    {
+      "code": "QC",
+      "name": "Quebec",
+      "type": "Province",
+      "region": "Central Canada",
+      "capital": "Quebec City"
+    }
+  ]
+  

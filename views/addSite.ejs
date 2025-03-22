@@ -1,0 +1,78 @@
+<%- include('partials/navbar', { page: '/addSite' }) %>
+
+<section class="hero py-10 px-6">
+  <div class="hero-content text-center">
+    <div class="max-w-2xl mx-auto w-full">
+      <h1 class="text-3xl font-bold mb-6">Add New Historic Site</h1>
+
+      <form method="POST" action="/addSite" class="grid gap-6 text-left bg-white p-6 rounded shadow">
+
+        <div>
+          <label class="font-semibold">Site ID</label>
+          <input type="text" name="siteId" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label class="font-semibold">Site Name</label>
+          <input type="text" name="site" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label class="font-semibold">Image URL</label>
+          <input type="url" name="image" class="input input-bordered w-full" required />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="font-semibold">Date</label>
+            <input type="number" name="date" class="input input-bordered w-full" required />
+          </div>
+          <div>
+            <label class="font-semibold">Date Type</label>
+            <input type="text" name="dateType" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        <div>
+          <label class="font-semibold">Designated Year</label>
+          <input type="number" name="designated" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label class="font-semibold">Location</label>
+          <input type="text" name="location" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label class="font-semibold">Province/Territory</label>
+          <select name="provinceOrTerritoryCode" class="select select-bordered w-full" required>
+            <% provincesAndTerritories.forEach(p => { %>
+              <option value="<%= p.code %>"><%= p.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div>
+          <label class="font-semibold">Description</label>
+          <textarea name="description" class="textarea textarea-bordered w-full" rows="4"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="font-semibold">Latitude</label>
+            <input type="number" step="0.00000001" name="latitude" class="input input-bordered w-full" required />
+          </div>
+          <div>
+            <label class="font-semibold">Longitude</label>
+            <input type="number" step="0.00000001" name="longitude" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary w-full">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>

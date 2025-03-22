@@ -1,0 +1,29 @@
+[
+    {
+      "siteId": "ON001",
+      "site": "Rideau Canal",
+      "description": "A historic waterway in Ontario.",
+      "date": 1832,
+      "dateType": "Year Built",
+      "image": "https://example.com/rideau.jpg",
+      "location": "Ottawa, Ontario",
+      "latitude": 45.4215,
+      "longitude": -75.6991,
+      "designated": 1925,
+      "provinceOrTerritoryCode": "ON"
+    },
+    {
+      "siteId": "BC001",
+      "site": "Fort Langley",
+      "description": "A trading post of the Hudson's Bay Company.",
+      "date": 1827,
+      "dateType": "Year Established",
+      "image": "https://example.com/fortlangley.jpg",
+      "location": "Langley, BC",
+      "latitude": 49.1682,
+      "longitude": -122.5804,
+      "designated": 1923,
+      "provinceOrTerritoryCode": "BC"
+    }
+  ]
+  

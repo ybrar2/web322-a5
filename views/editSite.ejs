@@ -1,0 +1,76 @@
+<%- include('partials/navbar', { page: '/editSite' }) %>
+
+<section class="hero py-8">
+  <div class="hero-content text-center">
+    <div class="max-w-xl mx-auto">
+      <h1 class="text-3xl font-bold mb-6">Edit Site</h1>
+
+      <form method="POST" action="/editSite" class="grid gap-4 text-left">
+
+        <input type="hidden" name="siteId" value="<%= site.siteId %>"/>
+
+        <div>
+          <label>Site Name</label>
+          <input type="text" name="site" value="<%= site.site %>" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label>Image URL</label>
+          <input type="url" name="image" value="<%= site.image %>" class="input input-bordered w-full" required />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label>Date</label>
+            <input type="number" name="date" value="<%= site.date %>" class="input input-bordered w-full" required />
+          </div>
+          <div>
+            <label>Date Type</label>
+            <input type="text" name="dateType" value="<%= site.dateType %>" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        <div>
+          <label>Designated</label>
+          <input type="number" name="designated" value="<%= site.designated %>" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label>Location</label>
+          <input type="text" name="location" value="<%= site.location %>" class="input input-bordered w-full" required />
+        </div>
+
+        <div>
+          <label>Province/Territory</label>
+          <select name="provinceOrTerritoryCode" class="select select-bordered w-full">
+            <% provincesAndTerritories.forEach(p => { %>
+              <option value="<%= p.code %>" <%= site.provinceOrTerritoryCode === p.code ? "selected" : "" %>>
+                <%= p.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div>
+          <label>Description</label>
+          <textarea name="description" class="textarea textarea-bordered w-full"><%= site.description %></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label>Latitude</label>
+            <input type="number" step="0.00000001" name="latitude" value="<%= site.latitude %>" class="input input-bordered w-full" required />
+          </div>
+          <div>
+            <label>Longitude</label>
+            <input type="number" step="0.00000001" name="longitude" value="<%= site.longitude %>" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-4 w-full">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
