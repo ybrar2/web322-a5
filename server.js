@@ -8,7 +8,7 @@
 * 
 *  Name: Yashleen Brar     Student ID: 140682238    Date: 2025-03-22
 *
-*  Published URL: (add your Vercel/VPS/Render/Glitch link here when deployed)
+*  Published URL: https://web322-a5-rusk.onrender.com
 *
 ********************************************************************************/
 
@@ -22,19 +22,19 @@ const HTTP_PORT = process.env.PORT || 8080;
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 
-// Middleware to parse form data
+// Middleware to parse form data from POST requests
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files (optional)
+// Optional: serve static assets if needed
 // app.use(express.static('public'));
 
 // ======================
-// Routes
+// ROUTES
 // ======================
 
-// Home redirect
+// Home Page (can customize this to render a home.ejs if desired)
 app.get('/', (req, res) => {
-  res.redirect('/addSite');
+  res.redirect('/addSite'); // Or render('home') if you have a homepage
 });
 
 // GET: Add Site Form
@@ -44,26 +44,24 @@ app.get('/addSite', (req, res) => {
       res.render('addSite', { provincesAndTerritories: data });
     })
     .catch(err => {
-      res.render('500', { message: `Error: ${err}` });
+      res.status(500).render('500', { message: `Error loading form: ${err}` });
     });
 });
 
-// POST: Add Site
+// POST: Submit New Site
 app.post('/addSite', (req, res) => {
   dataService.addSite(req.body)
     .then(() => res.redirect('/sites'))
-    .catch(err => res.render('500', { message: `Error: ${err}` }));
+    .catch(err => res.status(500).render('500', { message: `Error adding site: ${err}` }));
 });
 
-// GET: All Sites List
+// GET: View All Sites
 app.get('/sites', (req, res) => {
   dataService.getAllSites()
     .then(data => {
       res.render('sites', { sites: data });
     })
-    .catch(err => {
-      res.render('500', { message: `Error: ${err}` });
-    });
+    .catch(err => res.status(500).render('500', { message: `Error fetching sites: ${err}` }));
 });
 
 // GET: Edit Site Form
@@ -75,39 +73,35 @@ app.get('/editSite/:id', (req, res) => {
     .then(([site, provincesAndTerritories]) => {
       res.render('editSite', { site, provincesAndTerritories });
     })
-    .catch(err => {
-      res.render('500', { message: `Error: ${err}` });
-    });
+    .catch(err => res.status(500).render('500', { message: `Error loading edit form: ${err}` }));
 });
 
-// POST: Edit Site
+// POST: Submit Site Edit
 app.post('/editSite', (req, res) => {
   dataService.editSite(req.body.siteId, req.body)
     .then(() => res.redirect('/sites'))
-    .catch(err => res.render('500', { message: `Error: ${err}` }));
+    .catch(err => res.status(500).render('500', { message: `Error editing site: ${err}` }));
 });
 
-// ✅ NEW: GET /deleteSite/:id - Delete a site
+// GET: Delete a Site
 app.get('/deleteSite/:id', (req, res) => {
   dataService.deleteSite(req.params.id)
     .then(() => res.redirect('/sites'))
-    .catch(err => {
-      res.render('500', { message: `Error deleting site: ${err}` });
-    });
+    .catch(err => res.status(500).render('500', { message: `Error deleting site: ${err}` }));
 });
 
-// 404 Fallback
+// 404 Page (for undefined routes)
 app.use((req, res) => {
   res.status(404).render('404', { message: "Page Not Found" });
 });
 
 // ======================
-// Start Server
+// START SERVER
 // ======================
 dataService.initialize()
   .then(() => {
     app.listen(HTTP_PORT, () => {
-      console.log(`🚀 Express HTTP server listening on: http://localhost:${HTTP_PORT}`);
+      console.log(`🚀 Server running at http://localhost:${HTTP_PORT}`);
     });
   })
   .catch((err) => {
